@@ -1,0 +1,10 @@
+@startuml Comunicacion
+actor Usuario
+Usuario -> Main: Ejecuta el programa
+Main -> ManejadorDeDatos: leerDatos()
+ManejadorDeDatos -> Elemento: Crea instancias de Elemento
+Main -> CalculadorDeNeutrones: calcularAyB()
+CalculadorDeNeutrones -> Elemento: Realiza cálculos con Elemento
+Main -> ImpresorDeResultados: imprimirResultados()
+ImpresorDeResultados -> Elemento: Usa instancias de Elemento
+@enduml

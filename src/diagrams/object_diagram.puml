@@ -1,0 +1,26 @@
+@startuml Objetos
+object Main {
+}
+
+object ManejadorDeDatos {
+}
+
+object CalculadorDeNeutrones {
+}
+
+object ImpresorDeResultados {
+}
+
+object Elemento {
+    - numeroAtomico : int
+    - nombre : String
+    - neutrones : int
+}
+
+Main --> ManejadorDeDatos
+Main --> CalculadorDeNeutrones
+Main --> ImpresorDeResultados
+ManejadorDeDatos --> Elemento
+CalculadorDeNeutrones --> Elemento
+ImpresorDeResultados --> Elemento
+@enduml
