@@ -1,0 +1,21 @@
+@startuml
+actor Usuario
+participant Main
+participant ManejadorDeDatos
+participant CalculadorDeNeutrones
+participant ImpresorDeResultados
+participant Elemento
+
+Usuario -> Main: Ejecuta el programa
+Main -> ManejadorDeDatos: leerDatos("elements.txt")
+ManejadorDeDatos -> Elemento: new Elemento()
+ManejadorDeDatos <-- Main: Retorna lista de Elementos
+Main -> CalculadorDeNeutrones: calcularAyB(elementos)
+CalculadorDeNeutrones -> Elemento: sumatoriaLnY()
+CalculadorDeNeutrones -> Elemento: sumatoriaLnX()
+CalculadorDeNeutrones -> Elemento: sumatoriaLnXCuadrado()
+CalculadorDeNeutrones -> Elemento: sumatoriaLnXLnY()
+CalculadorDeNeutrones <-- Main: Retorna A y B
+Main -> ImpresorDeResultados: imprimirResultados(a, b, elementos)
+ImpresorDeResultados -> Elemento: Usa instancias de Elemento para calcular predicciones
+@enduml
