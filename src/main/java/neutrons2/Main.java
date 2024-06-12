@@ -1,38 +1,35 @@
 package neutrons2;
 
+import neutrons2.classes.*;
+import neutrons2.interfaces.Regression;
+
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
         try {
             PairFile pairFile = new PairFile("src/main/resources/elements.txt");
             List<OrderedPair> pairs = pairFile.getPairs();
 
-            PairVector pairVector = new PairVector(pairs);
+            LogCalculator logCalculator = new LogCalculator();
+            MatrixFactory matrixFactory = new MatrixFactory();
+            Regression regression = new ExponentialRegression(logCalculator, matrixFactory);
+            regression.calculateParameters(pairs);
+            regression.printParameters();
 
-            Calculator calculator = new Calculator();
-            double sumX = calculator.calculateSumX(pairs);
-            double sumY = calculator.calculateSumY(pairs);
-            double sumXSquare = calculator.calculateSumXSquare(pairs);
-            double sumXY = calculator.calculateSumXY(pairs);
+            ResultPrinter printer = new ResultPrinter();
+            printer.printResults(pairs, regression);
 
-            double[] parameters = calculator.calculateParameters(pairs.size(), sumX, sumY, sumXSquare, sumXY);
-            double a = parameters[0];
-            double b = parameters[1];
-
-            System.out.printf("Fitting parameters: a = %f, b = %f\n\n", a, b);
-
-            ResultTable resultTable = new ResultTable();
-            resultTable.showResults(pairs, a, b);
-
-            ChartGenerator chartGenerator = new ChartGenerator();
-            chartGenerator.generateChart(pairs, a, b);
+            ChartPlotter chartPlotter = new ChartPlotter("Neutron Prediction", pairs, regression);
+            chartPlotter.display();
 
         } catch (IOException e) {
-            System.err.println("Error reading or writing the file: " + e.getMessage());
-        } catch (ArithmeticException e) {
-            System.err.println("Error in calculation: " + e.getMessage());
+            logger.log(Level.SEVERE, "Error reading the elements file", e);
         }
     }
 }

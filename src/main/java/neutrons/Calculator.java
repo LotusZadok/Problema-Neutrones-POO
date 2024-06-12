@@ -35,9 +35,6 @@ public class Calculator {
     public double[] calculateParameters(int numElements, double sumLnX, double sumLnY, double sumLnXSquare, double sumLnXLnY) {
         double n = numElements;
         double denominator = n * sumLnXSquare - sumLnX * sumLnX;
-        if (denominator == 0) {
-            throw new ArithmeticException("El denominador es cero");
-        }
         double lnA = (sumLnY * sumLnXSquare - sumLnX * sumLnXLnY) / denominator;
         double b = (n * sumLnXLnY - sumLnX * sumLnY) / denominator;
         double a = Math.exp(lnA);
