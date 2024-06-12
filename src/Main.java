@@ -3,17 +3,18 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        ManejadorDeDatos manejador = new ManejadorDeDatos();
+        DataManager dataManager = new DataManager();
+        NeutronCalculator neutronCalculator = new NeutronCalculator();
+        ResultsPrinter resultsPrinter = new ResultsPrinter();
+
         try {
-            ArrayList<Elemento> elementos = manejador.leerDatos("elements.txt");
+            ArrayList<Element> elements = dataManager.readData("src/elements.txt");
 
-            CalculadorDeNeutrones calculador = new CalculadorDeNeutrones();
-            double[] AB = calculador.calcularAyB(elementos);
-            double a = AB[0];
-            double b = AB[1];
+            double[] parameters = neutronCalculator.calculateAandB(elements);
+            double a = parameters[0];
+            double b = parameters[1];
 
-            ImpresorDeResultados impresor = new ImpresorDeResultados();
-            impresor.imprimirResultados(a, b, elementos);
+            resultsPrinter.printResults(a, b, elements);
 
         } catch (IOException e) {
             e.printStackTrace();
