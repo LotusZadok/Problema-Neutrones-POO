@@ -11,7 +11,6 @@ public class Main {
 
             PairVector pairVector = new PairVector(pairs);
 
-            // Calculator for parameters a and b
             Calculator calculator = new Calculator();
             double sumX = calculator.calculateSumX(pairs);
             double sumY = calculator.calculateSumY(pairs);
@@ -24,11 +23,9 @@ public class Main {
 
             System.out.printf("Fitting parameters: a = %f, b = %f\n\n", a, b);
 
-            // Show results
             ResultTable resultTable = new ResultTable();
             resultTable.showResults(pairs, a, b);
 
-            // Generate chart
             ChartGenerator chartGenerator = new ChartGenerator();
             chartGenerator.generateChart(pairs, a, b);
 

@@ -19,7 +19,7 @@ public class ChartGenerator {
         XYSeries predictedSeries = new XYSeries("Predicted Neutrons");
 
         for (OrderedPair element : elements) {
-            double predictedNeutrons = a + b * element.getX(); // Using the correct linear formula
+            double predictedNeutrons = a + b * element.getX();
             realSeries.add(element.getX(), element.getY());
             predictedSeries.add(element.getX(), predictedNeutrons);
         }
