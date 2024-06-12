@@ -1,3 +1,5 @@
+package neutrons;
+
 public class Element {
     private int atomicNumber;
     private String name;
@@ -19,10 +21,5 @@ public class Element {
 
     public int getNeutrons() {
         return neutrons;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%d,%s,%d", atomicNumber, name, neutrons);
     }
 }
