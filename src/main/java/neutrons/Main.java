@@ -19,10 +19,11 @@ public class Main {
             double a = parameters[0];
             double b = parameters[1];
 
-            System.out.printf("Parámetros de ajuste: a = %f, b = %f\n\n", a, b);
+            System.out.printf("Fitting parameters: a = %f, b = %f\n\n", a, b);
 
-            System.out.printf("%-4s %-20s %-8s %-15s %-15s %-15s\n", "No.", "Nombre", "Atómico", "Neutrones Reales", "Neutrones Predichos", "Redondeo al más cercano", "Redondeo hacia cero");
-            System.out.println("------------------------------------------------------------------------------------------------------------------");
+            System.out.printf("%-4s %-15s %-8s %-20s %-20s %-20s %-20s\n", "No.", "Name", "Atomic", "Real Neutrons", "Pred. Neutrons", "Round Closest", "Round Down");
+
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
 
             for (int i = 0; i < elements.size(); i++) {
                 Element element = elements.get(i);
@@ -30,7 +31,7 @@ public class Main {
                 int roundedNearest = (int) Math.round(predictedNeutrons);
                 int roundedDown = (int) Math.floor(predictedNeutrons);
 
-                System.out.printf("%-4d %-20s %-8d %-15d %-15.2f %-15d %-15d\n",
+                System.out.printf("%-4d %-15s %-8d %-20d %-20.2f %-20d %-20d\n",
                         i + 1, element.getName(), element.getAtomicNumber(), element.getNeutrons(), predictedNeutrons, roundedNearest, roundedDown);
             }
 
@@ -41,9 +42,9 @@ public class Main {
             chartGenerator.generateChart(elements, a, b);
 
         } catch (IOException e) {
-            System.err.println("Error al leer o escribir el archivo: " + e.getMessage());
+            System.err.println("File read/write error: " + e.getMessage());
         } catch (ArithmeticException e) {
-            System.err.println("Error en el cálculo: " + e.getMessage());
+            System.err.println("Calculation error: " + e.getMessage());
         }
     }
 }
